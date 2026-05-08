@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #aa003e;
+  --color-surface: #ffffff;
+  --color-accent: #aa003e;
+  --color-cta: #aa003e;
+  --color-ink: #111111;
+  --color-paper: #f6f4f1;
+  --color-line: #d9d4ce;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.card {
+  border: 1px solid var(--color-line);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.card-hover {
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.card-hover:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.08);
+  transform: translateY(-0.125rem);
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem 1rem;
+}
+
+.apu-rule {
+  border-top: 4px solid var(--color-primary);
+}
+
+.apu-kicker {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
