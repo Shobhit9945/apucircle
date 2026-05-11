@@ -50,7 +50,6 @@ export default function DirectoryPage({ authenticated = false }) {
       navigate('/login', { state: { from: { pathname: `/clubs/${club.slug}` } } });
       return;
     }
-
     try {
       const { data } = await api.post(`/clubs/${club._id}/join`);
       toast.success(data.warning || 'Join request submitted');
@@ -60,53 +59,70 @@ export default function DirectoryPage({ authenticated = false }) {
   }
 
   return (
-    <main className={authenticated ? '' : 'page-shell'}>
+    <div className={authenticated ? '' : 'page-shell'}>
       <SectionHeader
         eyebrow={authenticated ? 'Advanced discovery' : 'Public directory'}
         title={authenticated ? 'Find your next club' : 'Explore APU clubs'}
       />
-      <form onSubmit={applySearch} className="card mb-6 grid gap-3 p-4 lg:grid-cols-[1fr_220px_220px_160px]">
-        <input
-          value={filters.q}
-          onChange={(event) => setFilters({ ...filters, q: event.target.value })}
-          placeholder="Search by club, tag, or keyword"
-          className="focus-ring rounded-lg border border-slate-200 px-3 py-2"
-        />
-        <select value={filters.category} onChange={(event) => setFilters({ ...filters, category: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2">
+
+      {/* Search & Filters */}
+      <form onSubmit={applySearch} className="card mb-6 p-4 grid gap-3 lg:grid-cols-[1fr_200px_200px_auto]">
+        <div className="relative">
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+          <input
+            value={filters.q}
+            onChange={(e) => setFilters({ ...filters, q: e.target.value })}
+            placeholder="Search by club, tag, or keyword"
+            className="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+          />
+        </div>
+        <select
+          value={filters.category}
+          onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+          className="px-3 py-2.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl focus:outline-none focus:border-primary transition-all text-body-md"
+        >
           <option value="">All categories</option>
-          {categories.map((category) => (
-            <option key={category}>{category}</option>
-          ))}
+          {categories.map((c) => <option key={c}>{c}</option>)}
         </select>
-        <select value={filters.language} onChange={(event) => setFilters({ ...filters, language: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2">
+        <select
+          value={filters.language}
+          onChange={(e) => setFilters({ ...filters, language: e.target.value })}
+          className="px-3 py-2.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl focus:outline-none focus:border-primary transition-all text-body-md"
+        >
           <option value="">Any language</option>
-          {languages.map((language) => (
-            <option key={language}>{language}</option>
-          ))}
+          {languages.map((l) => <option key={l}>{l}</option>)}
         </select>
-        <button className="focus-ring bg-black px-4 py-2 font-bold text-white hover:bg-apu-crimson">Search</button>
-        {authenticated ? (
+        <button className="bg-primary text-on-primary rounded-full px-5 py-2.5 text-label-lg font-semibold hover:bg-primary-container transition-colors">
+          Search
+        </button>
+        {authenticated && (
           <input
             value={filters.tags}
-            onChange={(event) => setFilters({ ...filters, tags: event.target.value })}
+            onChange={(e) => setFilters({ ...filters, tags: e.target.value })}
             placeholder="Tags: Music, Debate"
-            className="focus-ring rounded-lg border border-slate-200 px-3 py-2 lg:col-span-4"
+            className="lg:col-span-4 px-4 py-2.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl focus:outline-none focus:border-primary transition-all text-body-md"
           />
-        ) : null}
+        )}
       </form>
 
+      {/* Club Grid */}
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {loading
-          ? [0, 1, 2, 3, 4, 5].map((item) => <SkeletonCard key={item} />)
+          ? [0, 1, 2, 3, 4, 5].map((i) => <SkeletonCard key={i} />)
           : clubs.map((club) => (
               <ClubCard
                 key={club._id}
                 club={club}
                 action={
                   user && club.isMember ? (
-                    <span className="rounded-lg bg-emerald-50 px-3 py-2 text-sm font-bold text-emerald-700">Joined</span>
+                    <span className="bg-tertiary-fixed text-tertiary px-3 py-1.5 rounded-full text-label-md font-semibold">
+                      Joined
+                    </span>
                   ) : (
-                    <button onClick={() => joinClub(club)} className="focus-ring bg-apu-crimson px-3 py-2 text-sm font-bold text-white hover:bg-crimson-dark">
+                    <button
+                      onClick={() => joinClub(club)}
+                      className="bg-primary text-on-primary px-4 py-1.5 rounded-full text-label-md font-semibold hover:bg-primary-container transition-colors"
+                    >
                       Join
                     </button>
                   )
@@ -114,6 +130,13 @@ export default function DirectoryPage({ authenticated = false }) {
               />
             ))}
       </div>
-    </main>
+
+      {!loading && clubs.length === 0 && (
+        <div className="card p-8 text-center">
+          <span className="material-symbols-outlined text-[48px] text-on-surface-variant mb-3">search_off</span>
+          <p className="text-body-md text-on-surface-variant">No clubs found. Try adjusting your filters.</p>
+        </div>
+      )}
+    </div>
   );
 }

@@ -25,24 +25,51 @@ export default function StaffLoginPage() {
   }
 
   return (
-    <main className="grid min-h-screen place-items-center bg-navy px-4 py-12">
-      <form onSubmit={submit} className="w-full max-w-md border-t-4 border-apu-crimson bg-white p-6">
-        <p className="apu-kicker">University staff</p>
-        <h1 className="font-heading text-3xl font-semibold text-navy">Staff login</h1>
-        <div className="mt-6 grid gap-4">
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Email
-            <input type="email" required value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-          </label>
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Password
-            <input type="password" required value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-          </label>
-          <button disabled={submitting} className="focus-ring bg-black px-4 py-3 font-bold text-white hover:bg-apu-crimson disabled:opacity-60">
-            {submitting ? 'Logging in...' : 'Login'}
-          </button>
+    <main className="min-h-screen flex items-center justify-center bg-inverse-surface px-4 py-12 font-sans">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <span
+            className="material-symbols-outlined text-primary-fixed text-[48px] mb-4 block"
+            style={{ fontVariationSettings: "'FILL' 1" }}
+          >
+            trip_origin
+          </span>
+          <h1 className="text-headline-lg font-bold text-inverse-on-surface">APUCircle</h1>
+          <p className="text-body-md text-inverse-on-surface/70 mt-1">University Staff Portal</p>
         </div>
-      </form>
+
+        <form onSubmit={submit} className="bg-surface-container-lowest rounded-2xl p-6 shadow-soft space-y-4">
+          <h2 className="text-headline-sm font-bold text-on-surface">Staff Sign In</h2>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Email</label>
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="w-full bg-surface-container-low border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+              placeholder="staff@apu.ac.jp"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Password</label>
+            <input
+              type="password"
+              required
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              className="w-full bg-surface-container-low border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+              placeholder="••••••••"
+            />
+          </div>
+          <button
+            disabled={submitting}
+            className="w-full bg-primary text-on-primary rounded-full py-3 text-label-lg font-semibold hover:bg-primary-container transition-colors disabled:opacity-60 mt-2"
+          >
+            {submitting ? 'Signing in...' : 'Sign in'}
+          </button>
+        </form>
+      </div>
     </main>
   );
 }

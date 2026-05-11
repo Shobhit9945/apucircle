@@ -26,42 +26,54 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="grid min-h-[calc(100vh-65px)] place-items-center px-4 py-12">
-      <form onSubmit={submit} className="card w-full max-w-md space-y-5 p-6">
-        <div>
-          <p className="apu-kicker">Student portal</p>
-          <h1 className="font-heading text-3xl font-semibold text-navy">Log in to APUCircle</h1>
+    <main className="min-h-[calc(100vh-73px)] flex items-center justify-center px-4 py-12 bg-background">
+      <div className="w-full max-w-md">
+        {/* Brand */}
+        <div className="text-center mb-8">
+          <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-xl mx-auto mb-4">
+            A
+          </div>
+          <h1 className="text-headline-lg font-bold text-on-surface">Welcome back</h1>
+          <p className="text-body-md text-on-surface-variant mt-1">Sign in to APUCircle</p>
         </div>
-        <label className="grid gap-1 text-sm font-semibold text-slate-700">
-          APU email
-          <input
-            type="email"
-            required
-            value={form.email}
-            onChange={(event) => setForm({ ...form, email: event.target.value })}
-            className="focus-ring rounded-lg border border-slate-200 px-3 py-2"
-          />
-        </label>
-        <label className="grid gap-1 text-sm font-semibold text-slate-700">
-          Password
-          <input
-            type="password"
-            required
-            value={form.password}
-            onChange={(event) => setForm({ ...form, password: event.target.value })}
-            className="focus-ring rounded-lg border border-slate-200 px-3 py-2"
-          />
-        </label>
-        <button disabled={submitting} className="focus-ring w-full bg-black px-4 py-3 font-bold text-white hover:bg-apu-crimson disabled:opacity-60">
-          {submitting ? 'Logging in...' : 'Login'}
-        </button>
-        <p className="text-center text-sm text-slate-600">
-          New to APUCircle?{' '}
-          <Link to="/register" className="font-bold text-apu-crimson">
-            Create an account
-          </Link>
-        </p>
-      </form>
+
+        <form onSubmit={submit} className="card p-6 space-y-4">
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">APU email</label>
+            <input
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+              placeholder="name@apu.ac.jp"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Password</label>
+            <input
+              type="password"
+              required
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+              placeholder="••••••••"
+            />
+          </div>
+          <button
+            disabled={submitting}
+            className="w-full bg-primary text-on-primary rounded-full py-3 text-label-lg font-semibold hover:bg-primary-container transition-colors disabled:opacity-60 mt-2"
+          >
+            {submitting ? 'Signing in...' : 'Sign in'}
+          </button>
+          <p className="text-center text-body-sm text-on-surface-variant">
+            New to APUCircle?{' '}
+            <Link to="/register" className="text-primary font-semibold hover:underline">
+              Create an account
+            </Link>
+          </p>
+        </form>
+      </div>
     </main>
   );
 }

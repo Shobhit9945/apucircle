@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leader Management Console - APU Peace Builders</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8f9fa",
+                        "surface-tint": "#aa304f",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error": "#ffffff",
+                        "primary": "#670024",
+                        "on-background": "#191c1d",
+                        "on-primary-fixed": "#400013",
+                        "secondary-container": "#e2e2e5",
+                        "on-tertiary-fixed-variant": "#005232",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#ffb2bd",
+                        "tertiary-fixed-dim": "#90d5ab",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8e9",
+                        "primary-container": "#8a1538",
+                        "primary-fixed": "#ffd9dd",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#454749",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed-variant": "#8a1538",
+                        "outline": "#8a7174",
+                        "surface-container": "#edeeef",
+                        "secondary": "#5d5e61",
+                        "on-primary-container": "#ff97a8",
+                        "surface-dim": "#d9dadb",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#abf2c6",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-tertiary-container": "#7fc49b",
+                        "on-tertiary-fixed": "#002111",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#e2e2e5",
+                        "secondary-fixed-dim": "#c6c6c9",
+                        "on-secondary-fixed": "#1a1c1e",
+                        "outline-variant": "#debfc2",
+                        "tertiary": "#003921",
+                        "on-surface-variant": "#574144",
+                        "on-surface": "#191c1d",
+                        "primary-fixed-dim": "#ffb2bd",
+                        "on-secondary-container": "#636467",
+                        "tertiary-container": "#005232",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-sm": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar -->
+<nav class="docked h-screen left-0 w-64 border-r border-outline-variant hidden lg:flex flex-col p-stack-md gap-stack-lg bg-surface-container-low shrink-0 fixed z-10">
+<div>
+<div class="font-display text-headline-md font-bold text-primary mb-1">APUCircle</div>
+<div class="text-on-surface-variant font-label-md text-label-md">Student Infrastructure</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-stack-md text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-full px-4 py-3 hover:bg-surface-container-high transition-all active:scale-98 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">explore</span>
+<span class="font-label-lg text-label-lg">Discovery</span>
+</a>
+<a class="flex items-center gap-stack-md bg-primary-container text-on-primary-container rounded-full px-4 py-3 active:scale-98 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-lg text-label-lg">My Clubs</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-full px-4 py-3 hover:bg-surface-container-high transition-all active:scale-98 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">event</span>
+<span class="font-label-lg text-label-lg">Events</span>
+</a>
+<a class="flex items-center gap-stack-md text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container rounded-full px-4 py-3 hover:bg-surface-container-high transition-all active:scale-98 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-lg text-label-lg">Profile</span>
+</a>
+</div>
+<button class="bg-primary text-on-primary font-label-lg text-label-lg h-11 rounded-full w-full flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add</span>
+            Create Club
+        </button>
+</nav>
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile py-stack-sm bg-surface shadow-sm sticky top-0 z-20">
+<div class="font-display text-display font-bold text-primary">APUCircle</div>
+<div class="flex gap-4 text-primary scale-95 active:opacity-80 transition-transform">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary-container transition-colors duration-200" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a diverse university student with a bright, welcoming smile. Soft natural lighting highlights their features against a blurred, modern campus background. The light mode aesthetic uses clean whites and subtle shadows, fitting a professional academic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD02e1bcQxKZeopzNE9w3uJb4vqoK9QgxbRwykxKnQztdJ5w35mdh-OtcSXMmMC5v5hdvcWLHmXMz3aVopZv0ZjA1AC7Y4o_FOmY-rOm9u67uimuJCtVfp3nMuYYMW7hDziwEGoe_42lRfABmYj5INSdqWkM7plKqSD2P4S4cemOJMzXxPSBNopFMSwBfXa6WlwCDFWknEXAs7F2xGpBhyW5wXFZJV7USUrIe8w103Yj9G1c-cwZSVbkQzgf9L8_ifmfjAKZx0JDg"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 p-margin-mobile md:p-margin-desktop bg-background min-h-screen pb-24 md:pb-margin-desktop w-full max-w-container-max-width mx-auto">
+<!-- Header & Admin Toggle -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">APU Peace Builders</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Management Console</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low p-1 rounded-full border border-outline-variant">
+<span class="px-4 py-2 font-label-md text-label-md text-on-surface-variant cursor-pointer">Public View</span>
+<span class="px-4 py-2 font-label-md text-label-md bg-surface text-on-surface rounded-full shadow-sm">Admin View</span>
+</div>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Metrics Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">group</span>
+<h3 class="font-label-lg text-label-lg">Active Members</h3>
+</div>
+<p class="font-display text-display text-on-surface">142</p>
+<div class="flex items-center gap-1 text-tertiary-container mt-2 font-label-md text-label-md bg-tertiary-fixed px-2 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+<span>+12 this month</span>
+</div>
+</div>
+<!-- Metrics Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">person_add</span>
+<h3 class="font-label-lg text-label-lg">Pending Requests</h3>
+</div>
+<p class="font-display text-display text-on-surface">8</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-2 font-label-md text-label-md px-2 py-1">
+<span>Awaiting review</span>
+</div>
+</div>
+<!-- Metrics Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">event_upcoming</span>
+<h3 class="font-label-lg text-label-lg">Upcoming Events</h3>
+</div>
+<p class="font-display text-display text-on-surface">2</p>
+<div class="flex items-center gap-1 text-primary mt-2 font-label-md text-label-md px-2 py-1">
+<span>Next: Tomorrow</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Left Column: Requests & Posts -->
+<div class="lg:col-span-2 flex flex-col gap-stack-lg">
+<!-- Join Requests -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md shadow-sm">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Join Requests</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-0 divide-y divide-outline-variant">
+<!-- Request 1 -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Student avatar" class="w-10 h-10 rounded-full object-cover" data-alt="Headshot of a male university student smiling slightly. Soft, even studio lighting. The background is a clean, neutral gray to maintain a professional, academic tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQrfTehsk_1K_ioqSaJI0ZrToehYu6KeETK8sR9Dp_sWu9X2TdiMUwYK_1pEstWLVqvTVU9YFsLc-ZX37pW1UgK2iImiZfRcTWRAdMprcoznyA0V05qcNEjdOAFcj7DwBbRIIJgITliFWvegJkyHkPHETTVhwLWGEcUEIr2lyrgzS7BOxY5kcR6SxcbOWKiApKjllxzCrmXu7bEqbROqW3gloAKeXKhyMvP7WxV8WMYxKWukM7LGVsFBmIG2diOc-eLM-oFwncSg"/>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Marcus Chen</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">International Relations, Year 2</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-error text-error flex items-center justify-center hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+<!-- Request 2 -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Student avatar" class="w-10 h-10 rounded-full object-cover" data-alt="Headshot of a female university student looking directly at the camera with a confident expression. Bright, airy lighting typical of a modern light-mode UI avatar. Neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbJc0zYG4rjxm2ZHrSq8u4uzKDPPrpMav0jmuhTP7c7xWenKdnB3iXXXqP5rLY5BciywPWWHyg95McCVPpgmAVPrHkCaIItjOHLEyuVrG9EdR7903LcN6cjiUlNCIJz5Dlaz0xa07wB3bOrf5MMBnUXy_03OglsInz_MuQc9cKW9lpqWj5CmX4OWjdkK8HVRof1CX3yAoWP35KqgJI8e_eMmWEr-raFH6P0K7jy4U3HygxiYliaTL7bkDm4e8vQz7fBh_3WfEuKg"/>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Sarah Jenkins</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sociology, Year 1</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full border border-error text-error flex items-center justify-center hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Post Creator -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md shadow-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-stack-md">Create Announcement</h2>
+<div class="flex gap-3">
+<img alt="Club Logo" class="w-10 h-10 rounded-full object-cover" data-alt="A stylized logo icon featuring a modern, geometric peace symbol intertwined with a globe, rendered in deep crimson and white on a light gray background. Professional academic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtT1x-_-qqrTxIgWD_fiX9z0089VaiHpiDAF105DhfG2M3y2JezERWY_0-IhsEMqRkFM4KrDPbA58kxsk1MC75rWVVR2qmCvNeAUiAxWlCLFFuuWy2kkz1i8dtBOTNnQH-XJSuUg2PhQQSJ7MlTjJK6NiS19W7QXu99FGNTgstlU-PZBgbaBFMcUTX-7KmvaECcpeInkTbB-YViB5UCM7kzn8xD33k5l44boqGL9VVIqjClWvnGYgcYlM57Wa0NSFT7wrCXjdQMw"/>
+<div class="flex-1 flex flex-col gap-3">
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none h-24" placeholder="What's happening with APU Peace Builders?"></textarea>
+<div class="flex justify-between items-center">
+<div class="flex gap-2 text-on-surface-variant">
+<button class="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</button>
+<button class="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">event</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-full hover:opacity-90 transition-opacity">Post</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Profile Editor -->
+<div class="lg:col-span-1">
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md shadow-sm sticky top-stack-lg">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Club Profile</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">Edit</button>
+</div>
+<div class="flex flex-col items-center mb-stack-md">
+<div class="relative w-24 h-24 mb-3">
+<img alt="Club Logo" class="w-24 h-24 rounded-full object-cover border-4 border-surface" data-alt="A stylized logo icon featuring a modern, geometric peace symbol intertwined with a globe, rendered in deep crimson and white on a light gray background. Professional academic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqIwaJ3uahktPTPkePBjKD8VW0UvVybGqPqsh6uOOD0yWYmwwL7TvlLD_HJnM4HXUiR9_toU7B8TeX51xCEQX4f3O1zOeddNxOaof4OctfSGQrWWzSCL3As-JLlOHfT3ow-WMj9CjLwgyMC2WtwoNDU0iAhgEvTO087ekAnGDLULNTvQYq5wiBw1_iK2XkJSpQtuX_aEbEXN6Syhtiw9xabnak2WoGysObC8SMXKrr3ID8CitY_msgVoCMXQP1-Kuhofbdzs8N4Q"/>
+<button class="absolute bottom-0 right-0 w-8 h-8 bg-surface-container-high rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface text-center">APU Peace Builders</h3>
+</div>
+<div class="flex flex-col gap-4">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Status</label>
+<div class="bg-tertiary-fixed text-tertiary-container font-label-md text-label-md px-3 py-1 rounded-full w-fit flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+                                Actively Recruiting
+                            </div>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Description</label>
+<p class="font-body-sm text-body-sm text-on-surface bg-surface-container-low p-3 rounded-lg border border-outline-variant">
+                                Fostering dialogue, understanding, and actionable peace initiatives within the APU community and beyond.
+                            </p>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-1">Tags</label>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-3 py-1 rounded-full border border-outline-variant">Social Impact</span>
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-3 py-1 rounded-full border border-outline-variant">Debate</span>
+<span class="bg-surface-container-high text-on-surface font-label-md text-label-md px-3 py-1 rounded-full border border-outline-variant">Community</span>
+<button class="bg-surface flex items-center justify-center text-primary font-label-md text-label-md px-3 py-1 rounded-full border border-primary border-dashed hover:bg-primary-container hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[14px] mr-1">add</span> Add
+                                </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-surface border-t border-outline-variant shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:bg-surface-container-high transition-colors tap-highlight-transparent active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">explore</span>
+<span class="font-label-md text-label-md mt-1">Discovery</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-1 tap-highlight-transparent active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-md text-label-md mt-1">My Clubs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:bg-surface-container-high transition-colors tap-highlight-transparent active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">event</span>
+<span class="font-label-md text-label-md mt-1">Events</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 active:bg-surface-container-high transition-colors tap-highlight-transparent active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

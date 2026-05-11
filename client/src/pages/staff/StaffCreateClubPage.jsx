@@ -6,19 +6,21 @@ import { api, errorMessage } from '../../api/client.js';
 
 const categories = ['Sports', 'Culture', 'Music', 'Arts', 'Academic', 'Community Service', 'Language', 'Technology', 'Entrepreneurship', 'Other'];
 
+const fields = [
+  { key: 'name', label: 'Club Name', placeholder: 'e.g., APU Peace Builders' },
+  { key: 'meetingSchedule', label: 'Meeting Schedule', placeholder: 'e.g., Wednesdays 18:00 Room F204' },
+  { key: 'contactEmail', label: 'Contact Email', placeholder: 'club@apu.ac.jp' },
+  { key: 'instagramHandle', label: 'Instagram Handle', placeholder: '@clubname' },
+  { key: 'bannerImage', label: 'Banner Image URL', placeholder: 'https://...' },
+  { key: 'profileImage', label: 'Profile Image URL', placeholder: 'https://...' }
+];
+
 export default function StaffCreateClubPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: '',
-    description: '',
-    category: 'Sports',
-    tags: '',
-    languageOfOperation: 'Bilingual',
-    meetingSchedule: '',
-    bannerImage: '',
-    profileImage: '',
-    instagramHandle: '',
-    contactEmail: ''
+    name: '', description: '', category: 'Sports', tags: '',
+    languageOfOperation: 'Bilingual', meetingSchedule: '',
+    bannerImage: '', profileImage: '', instagramHandle: '', contactEmail: ''
   });
 
   async function submit(event) {
@@ -26,7 +28,7 @@ export default function StaffCreateClubPage() {
     try {
       await api.post('/clubs', {
         ...form,
-        tags: form.tags.split(',').map((tag) => tag.trim()).filter(Boolean),
+        tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean),
         bannerImage: form.bannerImage || undefined,
         profileImage: form.profileImage || undefined
       });
@@ -37,41 +39,83 @@ export default function StaffCreateClubPage() {
     }
   }
 
+  const inputClass = 'w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md';
+
   return (
-    <section>
-      <SectionHeader title="Create club" eyebrow="Staff" />
-      <form onSubmit={submit} className="card grid gap-4 p-5">
+    <section className="max-w-3xl">
+      <SectionHeader title="Create Club" eyebrow="Staff" />
+      <form onSubmit={submit} className="card p-6 space-y-5">
         <div className="grid gap-4 md:grid-cols-2">
-          {['name', 'meetingSchedule', 'contactEmail', 'instagramHandle', 'bannerImage', 'profileImage'].map((field) => (
-            <label key={field} className="grid gap-1 text-sm font-semibold text-slate-700">
-              {field}
-              <input value={form[field]} onChange={(event) => setForm({ ...form, [field]: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-            </label>
+          {fields.map(({ key, label, placeholder }) => (
+            <div key={key} className="space-y-1">
+              <label className="text-label-lg text-on-surface font-semibold">{label}</label>
+              <input
+                value={form[key]}
+                onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                placeholder={placeholder}
+                className={inputClass}
+              />
+            </div>
           ))}
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Category
-            <select value={form.category} onChange={(event) => setForm({ ...form, category: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2">
-              {categories.map((category) => <option key={category}>{category}</option>)}
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Category</label>
+            <select
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+              className={inputClass}
+            >
+              {categories.map((c) => <option key={c}>{c}</option>)}
             </select>
-          </label>
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Language
-            <select value={form.languageOfOperation} onChange={(event) => setForm({ ...form, languageOfOperation: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2">
+          </div>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Language</label>
+            <select
+              value={form.languageOfOperation}
+              onChange={(e) => setForm({ ...form, languageOfOperation: e.target.value })}
+              className={inputClass}
+            >
               <option>English</option>
               <option>Japanese</option>
               <option>Bilingual</option>
             </select>
-          </label>
+          </div>
         </div>
-        <label className="grid gap-1 text-sm font-semibold text-slate-700">
-          Tags
-          <input value={form.tags} onChange={(event) => setForm({ ...form, tags: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" placeholder="Music, Performance, Culture" />
-        </label>
-        <label className="grid gap-1 text-sm font-semibold text-slate-700">
-          Description
-          <textarea required value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} rows={6} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-        </label>
-        <button className="w-fit bg-apu-crimson px-5 py-3 font-bold text-white hover:bg-crimson-dark">Create club</button>
+
+        <div className="space-y-1">
+          <label className="text-label-lg text-on-surface font-semibold">Tags</label>
+          <input
+            value={form.tags}
+            onChange={(e) => setForm({ ...form, tags: e.target.value })}
+            placeholder="Music, Performance, Culture (comma-separated)"
+            className={inputClass}
+          />
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-label-lg text-on-surface font-semibold">Description</label>
+          <textarea
+            required
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            rows={5}
+            placeholder="Describe the club's mission and activities..."
+            className={`${inputClass} resize-none`}
+          />
+        </div>
+
+        <div className="flex gap-3">
+          <button className="bg-primary text-on-primary rounded-full px-6 py-3 text-label-lg font-semibold hover:bg-primary-container transition-colors flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">add_circle</span>
+            Create club
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate('/staff/clubs')}
+            className="border border-outline-variant text-on-surface px-6 py-3 rounded-full text-label-lg font-semibold hover:bg-surface-container-high transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </section>
   );

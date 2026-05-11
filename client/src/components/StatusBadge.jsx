@@ -1,22 +1,26 @@
-const toneClasses = {
-  green: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
-  yellow: 'bg-amber-50 text-amber-700 ring-amber-200',
-  red: 'bg-rose-50 text-rose-700 ring-rose-200'
-};
-
-const dotClasses = {
-  green: 'bg-emerald-500',
-  yellow: 'bg-amber-500',
-  red: 'bg-rose-500'
+const styles = {
+  green: {
+    wrapper: 'bg-[#e6f4ea] text-[#137333]',
+    dot: 'bg-[#1e8e3e] animate-pulse'
+  },
+  yellow: {
+    wrapper: 'bg-[#fef7e0] text-[#b06000]',
+    dot: 'bg-[#f9ab00]'
+  },
+  red: {
+    wrapper: 'bg-[#fce8e6] text-[#c5221f]',
+    dot: 'bg-[#ea4335]'
+  }
 };
 
 export default function StatusBadge({ status }) {
   const tone = status?.tone || 'red';
   const label = status?.label || 'Inactive';
+  const s = styles[tone] || styles.red;
 
   return (
-    <span className={`inline-flex items-center gap-1.5 border px-2.5 py-1 text-xs font-bold ${toneClasses[tone]}`}>
-      <span className={`h-2 w-2 rounded-full ${dotClasses[tone]}`} />
+    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-md shadow-sm ${s.wrapper}`}>
+      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${s.dot}`} />
       {label}
     </span>
   );

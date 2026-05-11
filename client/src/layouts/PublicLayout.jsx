@@ -2,27 +2,47 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 
 export default function PublicLayout() {
   return (
-    <div className="min-h-screen bg-mist">
-      <header className="sticky top-0 z-30 border-b border-line bg-white">
-        <div className="h-1 bg-apu-crimson" />
+    <div className="min-h-screen bg-background font-sans antialiased">
+      <header className="sticky top-0 z-30 bg-surface/90 backdrop-blur-md border-b border-outline-variant">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link to="/" className="group flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center bg-apu-crimson text-sm font-black text-white">
-              APU
-            </span>
-            <span>
-              <span className="block text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Student Life</span>
-              <span className="block font-heading text-xl font-black text-navy">APUCircle</span>
-            </span>
+          <Link to="/" className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-sm">
+              A
+            </div>
+            <div>
+              <p className="text-label-md text-on-surface-variant leading-tight">Student Life</p>
+              <p className="text-headline-sm font-bold text-primary leading-tight">APUCircle</p>
+            </div>
           </Link>
-          <div className="flex items-center gap-1">
-            <NavLink to="/clubs" className="px-3 py-2 text-sm font-bold text-graphite hover:text-apu-crimson">
+          <div className="flex items-center gap-2">
+            <NavLink
+              to="/clubs"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-full text-label-lg transition-colors ${
+                  isActive
+                    ? 'bg-primary-container text-on-primary-container'
+                    : 'text-on-surface-variant hover:bg-surface-container-high'
+                }`
+              }
+            >
               Clubs
             </NavLink>
-            <NavLink to="/login" className="px-3 py-2 text-sm font-bold text-graphite hover:text-apu-crimson">
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-full text-label-lg transition-colors ${
+                  isActive
+                    ? 'bg-primary-container text-on-primary-container'
+                    : 'text-on-surface-variant hover:bg-surface-container-high'
+                }`
+              }
+            >
               Login
             </NavLink>
-            <Link to="/register" className="focus-ring bg-apu-crimson px-4 py-2 text-sm font-bold text-white hover:bg-crimson-dark">
+            <Link
+              to="/register"
+              className="bg-primary text-on-primary px-5 py-2 rounded-full text-label-lg hover:bg-primary-container transition-colors shadow-sm"
+            >
               Register
             </Link>
           </div>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Find Your Circle - Onboarding</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Guidelines -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f8f9fa",
+                    "surface-tint": "#aa304f",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-error": "#ffffff",
+                    "primary": "#670024",
+                    "on-background": "#191c1d",
+                    "on-primary-fixed": "#400013",
+                    "secondary-container": "#e2e2e5",
+                    "on-tertiary-fixed-variant": "#005232",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#ffb2bd",
+                    "tertiary-fixed-dim": "#90d5ab",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e7e8e9",
+                    "primary-container": "#8a1538",
+                    "primary-fixed": "#ffd9dd",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#454749",
+                    "inverse-surface": "#2e3132",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9fa",
+                    "on-primary-fixed-variant": "#8a1538",
+                    "outline": "#8a7174",
+                    "surface-container": "#edeeef",
+                    "secondary": "#5d5e61",
+                    "on-primary-container": "#ff97a8",
+                    "surface-dim": "#d9dadb",
+                    "surface-variant": "#e1e3e4",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#abf2c6",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-tertiary-container": "#7fc49b",
+                    "on-tertiary-fixed": "#002111",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#e2e2e5",
+                    "secondary-fixed-dim": "#c6c6c9",
+                    "on-secondary-fixed": "#1a1c1e",
+                    "outline-variant": "#debfc2",
+                    "tertiary": "#003921",
+                    "on-surface-variant": "#574144",
+                    "on-surface": "#191c1d",
+                    "primary-fixed-dim": "#ffb2bd",
+                    "on-secondary-container": "#636467",
+                    "tertiary-container": "#005232",
+                    "error-container": "#ffdad6",
+                    "background": "#f8f9fa"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "gutter": "24px",
+                    "container-max-width": "1280px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "16px",
+                    "stack-md": "16px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "display": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg-mobile": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-sm": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-sm": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "display": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-lg": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.04em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-sm": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col pb-[100px]">
+<!-- Hero/Splash Graphic -->
+<div class="w-full h-[307px] min-h-[250px] relative overflow-hidden bg-surface-container rounded-b-3xl">
+<img alt="Group collaboration" class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A vibrant, diverse group of young adults engaged in an animated discussion around a bright, modern cafe table. Sunlight streams through large windows, creating a warm, energetic, and collaborative atmosphere perfectly suited for a light-mode university community aesthetic. Subtle touches of crimson and pale pink in the environment echo the primary brand colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5nvqoZbi7IjYr4Hzs9JsRFDzBv61jZeIfmTT0xOkr78f2UWdQczi9p1zFHmF42a7i08sd7Ny0mp5aC_hl4GQza2tmlluPiDnImyCcB_iLCRsFHIahkkvFHrgx_n98x9sMh0NA1lqFjSoxG-C2HuaoP1b91A1kb6LzJrgiRRdaj2Of2X8fEl21kKPE4iS9aGLh8lVIFE8kTLf-AcQBUElCtEPXBMK6o7GZmeqF4rTjoz9lauCa06PgUKgUoBN2AUOGYCH2WrcUkQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+</div>
+<!-- Main Content Container -->
+<main class="flex-grow w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop -mt-[60px] relative z-10 flex flex-col items-center">
+<!-- Header Section -->
+<header class="text-center mb-stack-lg max-w-2xl mx-auto px-4">
+<h1 class="font-display text-display text-primary mb-stack-sm drop-shadow-sm">Find Your Circle</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Select your interests to customize your discovery engine.</p>
+</header>
+<!-- Selection Grid -->
+<div class="w-full max-w-4xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-stack-md lg:gap-gutter pb-stack-lg">
+<!-- Card 1: Music (Unselected) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-surface-container-lowest border-2 border-outline-variant hover:border-primary/50 transition-all duration-200 hover:shadow-sm aspect-square text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-sm group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-secondary group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">music_note</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Music</span>
+</button>
+<!-- Card 2: Sailing (Selected - Demonstrating State) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-primary-fixed border-2 border-primary transition-all duration-200 shadow-sm aspect-square text-center relative overflow-hidden">
+<div class="absolute top-3 right-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest flex items-center justify-center mb-stack-sm">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">sailing</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary font-bold">Sailing</span>
+</button>
+<!-- Card 3: Debate (Unselected) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-surface-container-lowest border-2 border-outline-variant hover:border-primary/50 transition-all duration-200 hover:shadow-sm aspect-square text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-sm group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-secondary group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">forum</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Debate</span>
+</button>
+<!-- Card 4: Entrepreneurship (Unselected) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-surface-container-lowest border-2 border-outline-variant hover:border-primary/50 transition-all duration-200 hover:shadow-sm aspect-square text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-sm group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-secondary group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">lightbulb</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Entrepreneurship</span>
+</button>
+<!-- Card 5: Community Service (Unselected) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-surface-container-lowest border-2 border-outline-variant hover:border-primary/50 transition-all duration-200 hover:shadow-sm aspect-square text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-sm group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-secondary group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">volunteer_activism</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Community Service</span>
+</button>
+<!-- Card 6: Language Exchange (Selected - Demonstrating State) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-primary-fixed border-2 border-primary transition-all duration-200 shadow-sm aspect-square text-center relative overflow-hidden">
+<div class="absolute top-3 right-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-surface-container-lowest flex items-center justify-center mb-stack-sm">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">translate</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary font-bold">Language Exchange</span>
+</button>
+<!-- Card 7: Arts (Unselected) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-surface-container-lowest border-2 border-outline-variant hover:border-primary/50 transition-all duration-200 hover:shadow-sm aspect-square text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-sm group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-secondary group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">palette</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Arts</span>
+</button>
+<!-- Card 8: Sports (Unselected) -->
+<button class="group flex flex-col items-center justify-center p-stack-lg rounded-xl bg-surface-container-lowest border-2 border-outline-variant hover:border-primary/50 transition-all duration-200 hover:shadow-sm aspect-square text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-stack-sm group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-3xl text-secondary group-hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 0;">sports_basketball</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface group-hover:text-primary transition-colors">Sports</span>
+</button>
+</div>
+</main>
+<!-- Sticky Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-surface-container py-4 px-margin-mobile md:px-margin-desktop z-50 flex justify-center shadow-[0_-4px_24px_rgba(0,0,0,0.04)]">
+<div class="w-full max-w-md flex flex-col items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Select 1 more to continue</span>
+<!-- Button in Disabled State -->
+<button class="w-full h-[48px] rounded-full bg-surface-container-highest text-secondary-fixed-dim font-label-lg text-label-lg flex items-center justify-center cursor-not-allowed transition-colors" disabled="">
+                Continue to Dashboard
+            </button>
+</div>
+</div>
+</body></html>

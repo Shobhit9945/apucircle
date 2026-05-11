@@ -3,13 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #aa003e;
-  --color-surface: #ffffff;
-  --color-accent: #aa003e;
-  --color-cta: #aa003e;
-  --color-ink: #111111;
-  --color-paper: #f6f4f1;
-  --color-line: #d9d4ce;
+  --color-primary: #670024;
+  --color-surface: #f8f9fa;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #191c1d;
+  --color-outline-variant: #debfc2;
 }
 
 * {
@@ -18,9 +16,15 @@
 
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: var(--color-ink);
-  background: var(--color-paper);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #191c1d;
+  background: #f8f9fa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 button,
@@ -30,36 +34,32 @@ textarea {
   font: inherit;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .focus-ring {
   outline: none;
 }
-
-.focus-ring:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
 .focus-ring:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
 .card {
-  border: 1px solid var(--color-line);
-  border-radius: 0.5rem;
   background: #ffffff;
-  box-shadow: none;
-  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
-}
-
-.card-hover {
-  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  border: 1px solid rgba(222, 191, 194, 0.5);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 300ms ease;
 }
 
 .card-hover:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.08);
-  transform: translateY(-0.125rem);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .page-shell {
@@ -67,18 +67,18 @@ textarea {
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .apu-rule {
-  border-top: 4px solid var(--color-primary);
+  border-top: 3px solid var(--color-primary);
 }
 
 .apu-kicker {
   color: var(--color-primary);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -91,7 +91,7 @@ textarea {
 
 @media (min-width: 1024px) {
   .page-shell {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
 }

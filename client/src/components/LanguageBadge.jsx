@@ -1,7 +1,7 @@
-const classes = {
-  English: 'border-line bg-white text-graphite',
-  Japanese: 'border-apu-crimson bg-white text-apu-crimson',
-  Bilingual: 'border-black bg-black text-white'
+const styles = {
+  English: 'bg-surface-container text-on-surface-variant',
+  Japanese: 'bg-primary-fixed text-primary',
+  Bilingual: 'bg-tertiary-fixed text-tertiary'
 };
 
 const labels = {
@@ -12,7 +12,7 @@ const labels = {
 
 export default function LanguageBadge({ language }) {
   return (
-    <span className={`border px-2.5 py-1 text-xs font-black uppercase tracking-wide ${classes[language] || classes.English}`}>
+    <span className={`px-2.5 py-1 rounded-full text-label-md font-semibold ${styles[language] || styles.English}`}>
       {labels[language] || language}
     </span>
   );

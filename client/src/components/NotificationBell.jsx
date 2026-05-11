@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client.js';
 
@@ -14,13 +13,13 @@ export default function NotificationBell() {
   }, []);
 
   return (
-    <Link to="/notifications" className="focus-ring relative p-2 text-graphite hover:text-apu-crimson">
-      <Bell size={20} />
-      {unread > 0 ? (
-        <span className="absolute -right-1 -top-1 bg-apu-crimson px-1.5 text-xs font-bold text-white">
+    <Link to="/notifications" className="relative p-1 text-on-surface-variant hover:text-primary transition-colors">
+      <span className="material-symbols-outlined text-[24px]">notifications</span>
+      {unread > 0 && (
+        <span className="absolute -right-1 -top-1 min-w-[18px] h-[18px] bg-primary text-on-primary text-[10px] font-bold rounded-full flex items-center justify-center px-1">
           {unread}
         </span>
-      ) : null}
+      )}
     </Link>
   );
 }

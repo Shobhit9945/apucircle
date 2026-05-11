@@ -5,20 +5,9 @@ import { api, errorMessage } from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
 const interests = [
-  'Music',
-  'Sailing',
-  'Debate',
-  'Entrepreneurship',
-  'Community Service',
-  'Language Exchange',
-  'Technology',
-  'Dance',
-  'Sports',
-  'Culture',
-  'Photography',
-  'Public Speaking',
-  'Programming',
-  'Startups'
+  'Music', 'Sailing', 'Debate', 'Entrepreneurship', 'Community Service',
+  'Language Exchange', 'Technology', 'Dance', 'Sports', 'Culture',
+  'Photography', 'Public Speaking', 'Programming', 'Startups'
 ];
 
 export default function ProfilePage() {
@@ -58,30 +47,66 @@ export default function ProfilePage() {
     }
   }
 
+  const initials = user?.fullName
+    ? user.fullName.split(' ').map((n) => n[0]).slice(0, 2).join('').toUpperCase()
+    : 'U';
+
   return (
-    <section>
-      <SectionHeader title="Profile" eyebrow="Preferences" />
-      <form onSubmit={submit} className="card grid gap-5 p-5">
+    <section className="space-y-6 max-w-3xl">
+      {/* Profile Header */}
+      <div className="card p-6 flex items-center gap-5">
+        <div className="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center text-headline-md font-bold flex-shrink-0">
+          {initials}
+        </div>
+        <div>
+          <h1 className="text-headline-sm font-bold text-on-surface">{user?.fullName}</h1>
+          <p className="text-body-sm text-on-surface-variant">{user?.email}</p>
+          <span className="inline-flex items-center gap-1 mt-1 bg-primary-fixed text-primary px-3 py-0.5 rounded-full text-label-md">
+            <span className="material-symbols-outlined text-[14px]">school</span>
+            Semester {user?.semester}
+          </span>
+        </div>
+      </div>
+
+      <SectionHeader title="Edit Profile" eyebrow="Preferences" />
+
+      <form onSubmit={submit} className="card p-6 space-y-5">
         <div className="grid gap-4 md:grid-cols-3">
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Full name
-            <input value={form.fullName} onChange={(event) => setForm({ ...form, fullName: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-          </label>
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Semester
-            <input type="number" min="1" max="12" value={form.semester} onChange={(event) => setForm({ ...form, semester: Number(event.target.value) })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-          </label>
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Language basis
-            <select value={form.languageBasis} onChange={(event) => setForm({ ...form, languageBasis: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2">
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Full name</label>
+            <input
+              value={form.fullName}
+              onChange={(e) => setForm({ ...form, fullName: e.target.value })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Semester</label>
+            <input
+              type="number"
+              min="1"
+              max="12"
+              value={form.semester}
+              onChange={(e) => setForm({ ...form, semester: Number(e.target.value) })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Language basis</label>
+            <select
+              value={form.languageBasis}
+              onChange={(e) => setForm({ ...form, languageBasis: e.target.value })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary transition-all text-body-md"
+            >
               <option>English</option>
               <option>Japanese</option>
             </select>
-          </label>
+          </div>
         </div>
+
         <div>
-          <h2 className="font-heading text-lg font-semibold text-navy">Interests</h2>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <p className="text-label-lg text-on-surface font-semibold mb-3">Interests</p>
+          <div className="flex flex-wrap gap-2">
             {interests.map((interest) => {
               const active = form.interests.includes(interest);
               return (
@@ -89,8 +114,10 @@ export default function ProfilePage() {
                   type="button"
                   key={interest}
                   onClick={() => toggleInterest(interest)}
-                  className={`rounded-full px-3 py-2 text-sm font-semibold ring-1 ${
-                    active ? 'bg-apu-crimson text-white ring-apu-crimson' : 'bg-white text-slate-600 ring-line hover:ring-apu-crimson'
+                  className={`px-4 py-2 rounded-full text-label-md transition-colors ${
+                    active
+                      ? 'bg-primary text-on-primary shadow-sm'
+                      : 'bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low'
                   }`}
                 >
                   {interest}
@@ -99,21 +126,39 @@ export default function ProfilePage() {
             })}
           </div>
         </div>
-        <button className="focus-ring w-fit bg-black px-5 py-3 font-bold text-white hover:bg-apu-crimson">Save changes</button>
+
+        <button className="bg-primary text-on-primary rounded-full px-6 py-3 text-label-lg font-semibold hover:bg-primary-container transition-colors">
+          Save changes
+        </button>
       </form>
-      <form onSubmit={changePassword} className="card mt-6 grid max-w-2xl gap-4 p-5">
-        <h2 className="font-heading text-xl font-semibold text-navy">Change password</h2>
+
+      <form onSubmit={changePassword} className="card p-6 space-y-4">
+        <h2 className="text-headline-sm font-bold text-on-surface">Change password</h2>
         <div className="grid gap-4 sm:grid-cols-2">
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            Current password
-            <input type="password" required value={passwordForm.currentPassword} onChange={(event) => setPasswordForm({ ...passwordForm, currentPassword: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-          </label>
-          <label className="grid gap-1 text-sm font-semibold text-slate-700">
-            New password
-            <input type="password" required value={passwordForm.newPassword} onChange={(event) => setPasswordForm({ ...passwordForm, newPassword: event.target.value })} className="focus-ring rounded-lg border border-slate-200 px-3 py-2" />
-          </label>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">Current password</label>
+            <input
+              type="password"
+              required
+              value={passwordForm.currentPassword}
+              onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-label-lg text-on-surface font-semibold">New password</label>
+            <input
+              type="password"
+              required
+              value={passwordForm.newPassword}
+              onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+              className="w-full bg-surface-container-lowest border border-outline-variant text-on-surface rounded-xl px-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md"
+            />
+          </div>
         </div>
-        <button className="focus-ring w-fit bg-apu-crimson px-5 py-3 font-bold text-white hover:bg-crimson-dark">Update password</button>
+        <button className="bg-primary text-on-primary rounded-full px-6 py-3 text-label-lg font-semibold hover:bg-primary-container transition-colors">
+          Update password
+        </button>
       </form>
     </section>
   );

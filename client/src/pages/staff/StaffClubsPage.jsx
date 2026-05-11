@@ -37,24 +37,48 @@ export default function StaffClubsPage() {
       <SectionHeader
         title="Clubs"
         eyebrow="Administration"
-        action={<Link to="/staff/clubs/new" className="bg-apu-crimson px-4 py-2 font-bold text-white hover:bg-crimson-dark">Create club</Link>}
+        action={
+          <Link
+            to="/staff/clubs/new"
+            className="flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-full text-label-lg font-semibold hover:bg-primary-container transition-colors"
+          >
+            <span className="material-symbols-outlined text-[18px]">add</span>
+            Create club
+          </Link>
+        }
       />
       <div className="card overflow-hidden">
-        {loading ? <p className="p-5 text-slate-600">Loading clubs...</p> : null}
-        <div className="divide-y divide-slate-100">
+        {loading && <p className="p-5 text-body-md text-on-surface-variant">Loading clubs...</p>}
+        <div className="divide-y divide-outline-variant/40">
           {(data?.clubs || []).map((club) => (
-            <div key={club._id} className="grid gap-3 p-4 lg:grid-cols-[1fr_120px_120px_220px] lg:items-center">
-              <div>
-                <p className="font-heading font-semibold text-navy">{club.name}</p>
-                <p className="text-sm text-slate-600">{club.category} · {club.languageOfOperation}</p>
+            <div key={club._id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 hover:bg-surface-container-low transition-colors">
+              <div className="flex-1 min-w-0">
+                <p className="text-label-lg text-on-surface font-semibold">{club.name}</p>
+                <p className="text-body-sm text-on-surface-variant">{club.category} · {club.languageOfOperation}</p>
               </div>
-              <span className={`text-sm font-bold ${club.isActive ? 'text-emerald-700' : 'text-rose-700'}`}>{club.isActive ? 'Active' : 'Suspended'}</span>
-              <span className={`text-sm font-bold ${club.isVerifiedByStaff ? 'text-apu-crimson' : 'text-slate-500'}`}>{club.isVerifiedByStaff ? 'Verified' : 'Unverified'}</span>
+              <div className="flex items-center gap-2">
+                <span className={`px-3 py-1 rounded-full text-label-md font-semibold ${
+                  club.isActive ? 'bg-[#e6f4ea] text-[#137333]' : 'bg-error-container text-on-error-container'
+                }`}>
+                  {club.isActive ? 'Active' : 'Suspended'}
+                </span>
+                <span className={`px-3 py-1 rounded-full text-label-md font-semibold ${
+                  club.isVerifiedByStaff ? 'bg-primary-fixed text-primary' : 'bg-surface-container-high text-on-surface-variant'
+                }`}>
+                  {club.isVerifiedByStaff ? 'Verified' : 'Unverified'}
+                </span>
+              </div>
               <div className="flex gap-2">
-                <button onClick={() => verify(club)} className="rounded-lg bg-white px-3 py-2 text-sm font-bold text-navy ring-1 ring-slate-200">
+                <button
+                  onClick={() => verify(club)}
+                  className="border border-outline-variant text-on-surface px-3 py-1.5 rounded-full text-label-md hover:bg-surface-container-high transition-colors"
+                >
                   {club.isVerifiedByStaff ? 'Unverify' : 'Verify'}
                 </button>
-                <button onClick={() => suspend(club)} className="rounded-lg bg-rose-50 px-3 py-2 text-sm font-bold text-rose-700">
+                <button
+                  onClick={() => suspend(club)}
+                  className="border border-error/40 text-error bg-error-container/30 px-3 py-1.5 rounded-full text-label-md hover:bg-error-container transition-colors"
+                >
                   Suspend
                 </button>
               </div>
