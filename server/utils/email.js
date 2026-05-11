@@ -10,7 +10,7 @@ function hasSmtpConfig() {
 }
 
 export async function sendVerificationEmail(user, token) {
-  const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
+  const clientUrl = (process.env.CLIENT_URL || 'http://localhost:3000').split(',')[0].trim();
   const verifyUrl = `${clientUrl}/verify/${token}`;
 
   if (!hasSmtpConfig()) {

@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import Club from '../models/Club.js';
 import ClubLeaderApplication from '../models/ClubLeaderApplication.js';
 import Notification from '../models/Notification.js';

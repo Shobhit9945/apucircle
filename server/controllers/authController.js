@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 import { HttpError } from '../utils/httpError.js';
 import { sendVerificationEmail } from '../utils/email.js';
