@@ -7,6 +7,8 @@ export async function connectDB() {
 
   mongoose.set('strictQuery', true);
   await mongoose.connect(process.env.MONGODB_URI, {
-    dbName: process.env.MONGODB_DB_NAME || undefined
+    dbName: process.env.MONGODB_DB_NAME || undefined,
+    serverSelectionTimeoutMS: 5000,
+    connectTimeoutMS: 5000
   });
 }
