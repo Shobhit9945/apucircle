@@ -30,7 +30,7 @@ export async function register(req, res) {
   if (existing) throw new HttpError(409, 'An account with this email already exists');
 
   const verificationToken = crypto.randomBytes(32).toString('hex');
-  const passwordHash = await bcrypt.hash(req.body.password, 12);
+  const passwordHash = await bcrypt.hash(req.body.password, 10);
 
   const user = await User.create({
     fullName: req.body.fullName,
@@ -45,7 +45,9 @@ export async function register(req, res) {
     role: 'student'
   });
 
-  await sendVerificationEmail(user, verificationToken);
+  sendVerificationEmail(user, verificationToken).catch((err) =>
+    console.error('[APUCircle] Failed to send verification email:', err)
+  );
 
   res.status(201).json({
     message: 'Registration successful. Please verify your email to activate your account.'
