@@ -5,23 +5,46 @@ import { errorMessage } from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { login, resendVerification } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [needsVerification, setNeedsVerification] = useState(false);
+  const [resending, setResending] = useState(false);
 
   async function submit(event) {
     event.preventDefault();
     setSubmitting(true);
+    setNeedsVerification(false);
     try {
       const user = await login(form);
       toast.success('Welcome back');
       navigate(location.state?.from?.pathname || (user.role === 'staff' ? '/staff/dashboard' : '/dashboard'), { replace: true });
     } catch (error) {
-      toast.error(errorMessage(error, 'Unable to log in'));
+      const message = errorMessage(error, 'Unable to log in');
+      toast.error(message);
+      if (error.response?.status === 403 && /verify your email/i.test(message)) {
+        setNeedsVerification(true);
+      }
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleResend() {
+    if (!form.email) {
+      toast.error('Enter your APU email above first');
+      return;
+    }
+    setResending(true);
+    try {
+      const { message } = await resendVerification(form.email);
+      toast.success(message || 'Verification email sent if the account is unverified');
+    } catch (error) {
+      toast.error(errorMessage(error, 'Could not resend verification email'));
+    } finally {
+      setResending(false);
     }
   }
 
@@ -66,6 +89,16 @@ export default function LoginPage() {
           >
             {submitting ? 'Signing in...' : 'Sign in'}
           </button>
+          {needsVerification && (
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={resending}
+              className="w-full border border-primary text-primary rounded-full py-3 text-label-lg font-semibold hover:bg-primary/5 transition-colors disabled:opacity-60"
+            >
+              {resending ? 'Sending...' : 'Resend verification email'}
+            </button>
+          )}
           <p className="text-center text-body-sm text-on-surface-variant">
             New to APUCircle?{' '}
             <Link to="/register" className="text-primary font-semibold hover:underline">

@@ -1,6 +1,14 @@
 import express from 'express';
 import { body, param } from 'express-validator';
-import { login, logout, refresh, register, staffLogin, verifyEmail } from '../controllers/authController.js';
+import {
+  login,
+  logout,
+  refresh,
+  register,
+  resendVerification,
+  staffLogin,
+  verifyEmail
+} from '../controllers/authController.js';
 import { requireAuth } from '../middleware/auth.js';
 import { authLimiter } from '../middleware/rateLimiter.js';
 import { validate } from '../middleware/validate.js';
@@ -30,6 +38,14 @@ router.post(
   ],
   validate,
   asyncHandler(register)
+);
+
+router.post(
+  '/resend-verification',
+  authLimiter,
+  [body('email').isEmail().normalizeEmail().custom((email) => email.endsWith('@apu.ac.jp'))],
+  validate,
+  asyncHandler(resendVerification)
 );
 
 router.get(
