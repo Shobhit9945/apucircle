@@ -6,6 +6,7 @@ import app from '../../server/app.js';
 dotenv.config();
 
 let isConnected = false;
+const FUNCTION_PREFIX = '/.netlify/functions/api';
 const serverlessHandler = serverless(app);
 
 export const handler = async (event, context) => {
@@ -14,5 +15,13 @@ export const handler = async (event, context) => {
     await connectDB();
     isConnected = true;
   }
+
+  if (event.path && event.path.startsWith(FUNCTION_PREFIX)) {
+    event.path = '/api' + event.path.slice(FUNCTION_PREFIX.length);
+  }
+  if (event.rawUrl) {
+    event.rawUrl = event.rawUrl.replace(FUNCTION_PREFIX, '/api');
+  }
+
   return serverlessHandler(event, context);
 };
