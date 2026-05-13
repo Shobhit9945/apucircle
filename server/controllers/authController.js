@@ -54,6 +54,33 @@ export async function register(req, res) {
   });
 }
 
+export async function resendVerification(req, res) {
+  const email = normalizeEmail(req.body.email);
+  assertStudentEmail(email);
+
+  const successMessage =
+    'If an unverified account exists for that email, a new verification link has been sent.';
+
+  const user = await User.findOne({ email });
+  if (!user || user.isVerified) {
+    return res.json({ message: successMessage });
+  }
+
+  const verificationToken = crypto.randomBytes(32).toString('hex');
+  user.verificationToken = verificationToken;
+  user.verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  await user.save();
+
+  try {
+    await sendVerificationEmail(user, verificationToken);
+  } catch (err) {
+    console.error('[APUCircle] Failed to resend verification email:', err);
+    throw new HttpError(500, 'Could not send verification email. Please try again later.');
+  }
+
+  res.json({ message: successMessage });
+}
+
 export async function verifyEmail(req, res) {
   const user = await User.findOne({
     verificationToken: req.params.token,

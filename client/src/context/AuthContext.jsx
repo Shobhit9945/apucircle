@@ -41,6 +41,11 @@ export function AuthProvider({ children }) {
     return data;
   }
 
+  async function resendVerification(email) {
+    const { data } = await api.post('/auth/resend-verification', { email });
+    return data;
+  }
+
   async function logout() {
     try {
       await api.post('/auth/logout');
@@ -64,6 +69,7 @@ export function AuthProvider({ children }) {
       login,
       staffLogin,
       register,
+      resendVerification,
       logout,
       updateProfile,
       refreshUser: loadMe
