@@ -52,7 +52,13 @@ export default function RegisterPage() {
           </div>
           <h1 className="text-headline-md font-bold text-on-surface">Check your email</h1>
           <p className="text-body-md text-on-surface-variant">
-            In local development without SMTP credentials, the backend prints the verification URL in the server console.
+            We've sent a verification link to{' '}
+            <span className="font-semibold text-on-surface">{form.email}</span>. Click the link to
+            activate your account.
+          </p>
+          <p className="text-body-sm text-on-surface-variant">
+            Didn't get it? Check your spam folder, or go to the login page and use{' '}
+            <span className="font-semibold">Resend verification email</span>.
           </p>
           <Link to="/login" className="inline-flex bg-primary text-on-primary px-6 py-3 rounded-full text-label-lg font-semibold hover:bg-primary-container transition-colors">
             Go to login

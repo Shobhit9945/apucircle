@@ -27,30 +27,53 @@ export async function register(req, res) {
   assertStudentEmail(email);
 
   const existing = await User.findOne({ email });
-  if (existing) throw new HttpError(409, 'An account with this email already exists');
+  if (existing && existing.isVerified) {
+    throw new HttpError(409, 'An account with this email already exists');
+  }
 
   const verificationToken = crypto.randomBytes(32).toString('hex');
-  const passwordHash = await bcrypt.hash(req.body.password, 10);
+  const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-  const user = await User.create({
-    fullName: req.body.fullName,
-    email,
-    passwordHash,
-    languageBasis: req.body.languageBasis || 'English',
-    semester: req.body.semester || 1,
-    interests: req.body.interests || [],
-    verificationToken,
-    verificationTokenExpires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    isVerified: false,
-    role: 'student'
-  });
+  let user;
+  const isNew = !existing;
 
-  sendVerificationEmail(user, verificationToken).catch((err) =>
-    console.error('[APUCircle] Failed to send verification email:', err)
-  );
+  if (existing) {
+    existing.verificationToken = verificationToken;
+    existing.verificationTokenExpires = verificationTokenExpires;
+    await existing.save();
+    user = existing;
+  } else {
+    const passwordHash = await bcrypt.hash(req.body.password, 10);
+    user = await User.create({
+      fullName: req.body.fullName,
+      email,
+      passwordHash,
+      languageBasis: req.body.languageBasis || 'English',
+      semester: req.body.semester || 1,
+      interests: req.body.interests || [],
+      verificationToken,
+      verificationTokenExpires,
+      isVerified: false,
+      role: 'student'
+    });
+  }
 
-  res.status(201).json({
-    message: 'Registration successful. Please verify your email to activate your account.'
+  try {
+    await sendVerificationEmail(user, verificationToken);
+  } catch (err) {
+    console.error('[APUCircle] Failed to send verification email:', err);
+    if (isNew) {
+      await User.deleteOne({ _id: user._id });
+    }
+    throw new HttpError(
+      502,
+      'We could not send your verification email. Please try again in a few minutes or contact support.'
+    );
+  }
+
+  res.status(isNew ? 201 : 200).json({
+    message: 'Registration successful. Please check your email to verify your account.',
+    email: user.email
   });
 }
 
